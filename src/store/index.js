@@ -54,6 +54,10 @@ export default createStore({
       },
     ],
     productsCategories: ['category1', 'category2', 'category3', 'category4'],
+    cart: {
+      products: [],
+      cartTotal: 0
+    }
   },
   getters: {
     PRODUCTS: state => {
@@ -68,11 +72,49 @@ export default createStore({
       } else {
         return state.products.filter(item => item['price'] >= min && item['price'] <= max);
       }
+    },
+    CART: state => {
+      const cart = JSON.parse(localStorage.getItem('cart-eshop'))
+      if (Array.isArray(cart) && cart.length) {
+        return state.cart.products = cart
+      }
+      else {
+        return state.cart.products = []
+      }
+    },
+    CART_TOTAL: state => {
+      return state.cart.cartTotal
     }
   },
   mutations: {
+    SET_CART_TOTAL: (state, payload) => {
+      state.cart.cartTotal = payload
+    },
+    SET_CART_PRODUCT: (state, payload) => {
+      const products = state.cart.products
+      if (products.find(e => e.id === payload)) {
+        products.find(e => e.id === payload).count++
+      } else {
+        products.push({ id: payload, count: 1 })
+      }
+      localStorage.setItem('cart-eshop', JSON.stringify(products))
+    }
   },
   actions: {
+
+    SET_CART_TOTAL: (ctx) => {
+      const cart = JSON.parse(localStorage.getItem('cart-eshop'))
+      let total = 0
+      if (Array.isArray(cart) && cart.length) {
+        cart.forEach(item => {
+          total += item.count
+        });
+      }
+      ctx.commit('SET_CART_TOTAL', total)
+    },
+    SET_CART_PRODUCT: (ctx, payload) => {
+      ctx.commit('SET_CART_PRODUCT', payload)
+    }
   },
   modules: {
   }

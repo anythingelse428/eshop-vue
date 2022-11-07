@@ -5,7 +5,10 @@
                 <router-link class="navigation__link" to="/">Brand</router-link>
             </div>
             <div class="navigation__items">
-                <router-link class="navigation__link" to="/cart">Корзина</router-link>
+                <router-link class="navigation__link" to="/cart">
+                    Корзина
+                    <cart-button></cart-button>
+                </router-link>
                 <router-link class="navigation__link" to="/profile">Профиль</router-link>
             </div>
         </div>
@@ -29,6 +32,7 @@
         color: #000;
         text-decoration: none;
         transition: color .3s;
+
         &:visited {
             color: #000;
         }
@@ -45,3 +49,11 @@
     }
 }
 </style>
+<script>
+import CartButton from './CartButton.vue';
+
+export default {
+    name: "NavigationMenu",
+    components: { CartButton }
+}
+</script>

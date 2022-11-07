@@ -10,12 +10,17 @@
         <div class="item__price">
             {{ price }}
         </div>
+        <add-to-cart-button :productId="id"></add-to-cart-button>
     </div>
 </template>
 
 <script>
+import AddToCartButton from './AddToCartButton.vue';
 export default {
     name: 'CatalogItem',
+    components: {
+        AddToCartButton
+    },
     props: {
         id: {
             type: Number,
