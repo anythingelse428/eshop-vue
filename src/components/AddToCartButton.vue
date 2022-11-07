@@ -37,7 +37,7 @@ export default {
             return this.$store.getters.CART_TOTAL
         },
         addToCart() {
-            this.$store.dispatch('SET_CART_PRODUCT', this.productId)
+            this.$store.dispatch('ADD_CART_PRODUCT', this.productId)
             this.$store.dispatch('SET_CART_TOTAL', this.getCartTotal)
         }
     }

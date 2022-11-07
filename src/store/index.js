@@ -102,8 +102,8 @@ export default createStore({
   },
   actions: {
 
-    SET_CART_TOTAL: (ctx) => {
-      const cart = JSON.parse(localStorage.getItem('cart-eshop'))
+    SET_CART_TOTAL: async (ctx) => {
+      const cart = await JSON.parse(localStorage.getItem('cart-eshop'))
       let total = 0
       if (Array.isArray(cart) && cart.length) {
         cart.forEach(item => {
@@ -112,7 +112,7 @@ export default createStore({
       }
       ctx.commit('SET_CART_TOTAL', total)
     },
-    SET_CART_PRODUCT: (ctx, payload) => {
+    ADD_CART_PRODUCT: (ctx, payload) => {
       ctx.commit('SET_CART_PRODUCT', payload)
     }
   },
